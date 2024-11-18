@@ -1,0 +1,41 @@
+-- Criação da tabela Gestor
+CREATE TABLE Gestor (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(60) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    email VARCHAR(125) NOT NULL UNIQUE,
+    senha VARCHAR(50) NOT NULL
+);
+
+-- Criação da tabela Funcionario
+CREATE TABLE Funcionario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(60) NOT NULL,
+    email VARCHAR(125) NOT NULL UNIQUE,
+    senha VARCHAR(50) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    dataNascimento DATE NOT NULL,
+    id_gestor INT,
+    FOREIGN KEY (id_gestor) REFERENCES Gestor(id) ON DELETE SET NULL
+);
+
+-- Criação da tabela Materiais
+CREATE TABLE Materiais (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT NOT NULL,
+    acesso BIT NOT NULL
+);
+
+-- Criação da tabela Solicitacoes
+CREATE TABLE Solicitacoes (
+    id SERIAL PRIMARY KEY,
+    id_funcionario INT NOT NULL,
+    id_material INT NOT NULL,
+    dataSolicitacao DATE NOT NULL,
+    quantidade INT NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    dataDevolucao DATE,
+    FOREIGN KEY (id_funcionario) REFERENCES Funcionario(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_material) REFERENCES Materiais(id) ON DELETE CASCADE
+);
