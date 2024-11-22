@@ -102,3 +102,4 @@ Wireframe de interface principal: https://www.figma.com/design/MQBbgsOQc7W7U2Ce8
 
 
 
+# EHL
