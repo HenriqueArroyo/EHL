@@ -13,7 +13,7 @@ class CreateGestoresTable extends Migration
             $table->string('nome', 60);
             $table->string('cpf', 14)->unique();
             $table->string('email', 125)->unique();
-            $table->string('senha', 50);
+            $table->string('senha', 120);
             $table->timestamps();  // Cria created_at e updated_at automaticamente
         });
     }

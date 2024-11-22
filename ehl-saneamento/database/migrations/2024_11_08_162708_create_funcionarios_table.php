@@ -13,7 +13,7 @@ class CreateFuncionariosTable extends Migration
             $table->id();
             $table->string('nome', 60);
             $table->string('email', 125)->unique();
-            $table->string('senha', 50);
+            $table->string('senha', 100);
             $table->string('cpf', 14)->unique();
             $table->date('dataNascimento');
             $table->unsignedBigInteger('id_gestor')->nullable();

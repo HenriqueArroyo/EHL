@@ -9,22 +9,33 @@ class Solicitacao extends Model
 {
     use HasFactory;
 
-    // Definir a tabela associada ao modelo (opcional, já que o Laravel usa o plural automaticamente)
+    // Definindo a tabela associada ao modelo (não é necessário se o nome da tabela for o plural do modelo)
     protected $table = 'solicitacoes';
 
-    // Definir os campos que podem ser atribuídos em massa
+    // Campos que podem ser preenchidos em massa
     protected $fillable = [
-        'id_funcionario', 'id_material', 'dataSolicitacao', 'quantidade', 'status', 'dataDevolucao',
+        'id_funcionario',
+        'id_material',
+        'dataSolicitacao',
+        'quantidade',
+        'status',
+        'dataDevolucao',
     ];
 
-    // Definir os relacionamentos com os modelos Funcionario e Material
+    // Definindo o relacionamento com o modelo Funcionario
     public function funcionario()
     {
         return $this->belongsTo(Funcionario::class, 'id_funcionario');
     }
 
+    // Definindo o relacionamento com o modelo Material
     public function material()
     {
         return $this->belongsTo(Material::class, 'id_material');
     }
+
+    // Relacionamento para a data de devolução (pode ser null)
+    protected $casts = [
+        'dataDevolucao' => 'date', // Fazendo o cast para o tipo date
+    ];
 }

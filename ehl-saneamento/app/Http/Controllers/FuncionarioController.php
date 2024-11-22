@@ -3,65 +3,75 @@
 namespace App\Http\Controllers;
 
 use App\Models\Funcionario;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFuncionarioRequest;
-use App\Http\Requests\UpdateFuncionarioRequest;
+use App\Models\Gestor;
+use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $funcionarios = Funcionario::all();
+        return view('funcionarios.index', compact('funcionarios'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Exibir o formulário de cadastro
     public function create()
     {
-        //
+        // Obter os gestores para exibir no select
+        $gestores = Gestor::all();
+
+        return view('funcionarios.create', compact('gestores'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreFuncionarioRequest $request)
+    public function edit($id)
     {
-        //
+        $funcionario = Funcionario::findOrFail($id);
+        return view('funcionarios.edit', compact('funcionario'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Funcionario $funcionario)
+    // Armazenar um novo funcionário
+    public function store(Request $request)
     {
-        //
+        // Validar os dados do formulário
+        $validated = $request->validate([
+            'nome' => 'required|string|max:60',
+            'email' => 'required|string|email|max:125|unique:funcionarios,email',
+            'senha' => 'required|string|min:8',
+            'cpf' => 'required|string|max:14|unique:funcionarios,cpf',
+            'dataNascimento' => 'required|date',
+            'id_gestor' => 'nullable|exists:gestores,id', // Validar se o gestor existe
+        ]);
+
+
+
+        // Criar o funcionário
+        Funcionario::create($validated);
+
+        // Redirecionar com sucesso
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário cadastrado com sucesso!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Funcionario $funcionario)
+    public function update(Request $request, $id)
     {
-        //
+        $funcionario = Funcionario::findOrFail($id);
+        $request->validate([
+            'nome' => 'required|max:60',
+            'email' => 'required|email',
+            'senha' => 'nullable|min:6',
+            'cpf' => 'required',
+            'dataNascimento' => 'required|date',
+        ]);
+
+        $funcionario->update($request->all());
+
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário atualizado com sucesso!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFuncionarioRequest $request, Funcionario $funcionario)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Funcionario $funcionario)
+    public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::findOrFail($id);
+        $funcionario->delete();
+
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário removido com sucesso!');
     }
 }

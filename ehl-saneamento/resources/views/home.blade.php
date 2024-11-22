@@ -11,6 +11,7 @@
 <img id="background" src="{{asset('assets/img/Home.png')}}" alt="">
 <div class="link">
     <a href="" id="entrar">Entrar |</a>
+    <a href="" id="registrar">Registrar</a>
 </div>
 
 <div class="container">
