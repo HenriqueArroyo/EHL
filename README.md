@@ -91,7 +91,7 @@ Compatibilidade com navegadores modernos e responsividade para diferentes dispos
 Wireframe de interface principal: https://www.figma.com/design/MQBbgsOQc7W7U2Ce8eEQ7K/EHL?node-id=0-1&t=P7vSjx3JWksEEY76-1
 
 
-
+php artisan db:seed --class=GestoresTableSeeder
 
 
 
