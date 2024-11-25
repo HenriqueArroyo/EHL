@@ -1,0 +1,106 @@
+/* Estilização geral */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Remove a rolagem */
+}
+
+
+#background{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+    left: 0;
+}
+/* Container principal */
+.container {
+    position: absolute;
+    right:0;
+    display: flex;
+    width: 110vh;
+    height: 100vh;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+
+/* Painel de login */
+.login-panel {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo h1 {
+    font-size: 3rem;
+    color: #3b49df;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.logo span {
+    font-size: 1rem;
+    color: #009fd4;
+}
+
+/* Formulário */
+form {
+    width: 100%;
+    max-width: 300px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #0052cc;
+    box-shadow: 0 0 5px rgba(0, 82, 204, 0.3);
+}
+
+/* Botão de login */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3b49df;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #2a37b5;
+}

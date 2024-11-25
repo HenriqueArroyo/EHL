@@ -34,6 +34,9 @@ Route::post('/materiais', [MaterialController::class, 'store'])->name('materiais
 // Rota para listar todos os materiais
 Route::get('/materiais', [MaterialController::class, 'index'])->name('materiais.index');
 
+// Rota para listar todos os materiais
+Route::get('/visualizarMateriais', [MaterialController::class, 'viewFuncionario'])->name('funcionarios.visualizarMateriais');
+
 // Rota para editar um material
 Route::get('/materiais/{id}/edit', [MaterialController::class, 'edit'])->name('materiais.edit');
 
@@ -48,3 +51,14 @@ use App\Http\Controllers\SolicitacaoController;
 Route::get('solicitacoes', [SolicitacaoController::class, 'index'])->name('solicitacoes.index');
 Route::get('solicitacoes/create', [SolicitacaoController::class, 'create'])->name('solicitacoes.create');
 Route::post('solicitacoes', [SolicitacaoController::class, 'store'])->name('solicitacoes.store');
+
+use App\Http\Controllers\AuthController;
+
+// Exibir o formulário de login
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+
+// Processar o login
+Route::post('login', [AuthController::class, 'login']);
+
+// Logout
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');

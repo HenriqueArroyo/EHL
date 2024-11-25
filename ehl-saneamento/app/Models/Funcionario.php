@@ -1,30 +1,26 @@
 <?php
-
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
-class Funcionario extends Model
+class Funcionario extends Model implements Authenticatable
 {
-    use HasFactory;
+    use HasFactory, AuthenticableTrait;
 
-    // Definir a tabela associada ao modelo
     protected $table = 'funcionarios';
 
-    // Definir os campos que podem ser atribuídos em massa
     protected $fillable = [
         'nome', 'email', 'senha', 'cpf', 'dataNascimento', 'id_gestor',
     ];
 
-    // Definir os campos que devem ser ocultados quando o modelo for convertido em array ou JSON
     protected $hidden = [
         'senha',
     ];
 
-    // Criar mutators para criptografar a senha antes de salvar
     public static function boot()
     {
         parent::boot();
@@ -42,7 +38,6 @@ class Funcionario extends Model
         });
     }
 
-    // Definir o relacionamento com o modelo Gestor (um funcionário pertence a um gestor)
     public function gestor()
     {
         return $this->belongsTo(Gestor::class, 'id_gestor');

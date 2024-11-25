@@ -41,6 +41,15 @@ class MaterialController extends Controller
         return view('materiais.index', compact('materiais'));
     }
 
+    public function viewFuncionario()
+    {
+        // Obtém todos os materiais do banco de dados
+        $materiais = Material::all();
+
+        // Retorna a view de listagem passando os materiais
+        return view('funcionarios.visualizarMateriais', compact('materiais'));
+    }
+
     // Exibe o formulário de edição de um material
     public function edit($id)
     {
