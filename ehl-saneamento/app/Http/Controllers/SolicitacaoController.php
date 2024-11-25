@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Solicitacao;
 use App\Models\Funcionario;
+use App\Http\Controllers\FuncionarioController;
 use App\Models\Material;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class SolicitacaoController extends Controller
         $material = Material::findOrFail($request->id_material);
 
         // Lógica para definir status e ajustar estoque
-        $status = $material->acesso === 'Sim' ? 'Aprovado' : 'Requisitado';
+        $status = $material->acesso === 'true' ? 'Aprovado' : 'Requisitado';
 
         if ($status === 'Aprovado') {
             if ($material->quantidade < $request->quantidade) {

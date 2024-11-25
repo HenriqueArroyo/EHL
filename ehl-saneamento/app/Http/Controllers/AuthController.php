@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+    public function getUserId()
+    {
+        // Retorna o ID do usuário autenticado
+        return Auth::id();
+    }
     public function showLoginForm()
     {
         return view('auth.login');

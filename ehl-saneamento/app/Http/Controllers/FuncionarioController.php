@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Funcionario;
 use App\Models\Gestor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class FuncionarioController extends Controller
 {
     public function index()
     {
+          // Recupera o ID do usuário autenticado
+          $userId = Auth::id();
+
+          // Caso precise filtrar dados baseados no ID do usuário logado
+          $funcionarios = Funcionario::where('id_gestor', $userId)->get();
         $funcionarios = Funcionario::all();
         return view('funcionarios.index', compact('funcionarios'));
     }
