@@ -11,7 +11,7 @@
 <img id="background" src="{{asset('assets/img/Index.png')}}" alt="">
 <div class="container">
     <div class="button"><a href="/visualizarMateriais">Visualizar Materiais</a></div>
-    <div class="button"><a href="">Solicitar Materiais</a></div>
+    <div class="button"><a href="/solicitarMateriais">Solicitar Materiais</a></div>
     <div class="button"><a href="">Visualizar Pedidos</a></div>
     <div class="button"><a href="">Devolução de Materiais</a></div>
 </div>

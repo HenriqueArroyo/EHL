@@ -1,79 +1,48 @@
-<!-- resources/views/solicitacoes/create.blade.php -->
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Produto</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <script>
+        // Função para buscar o nome do material ao selecionar o ID
+        function updateMaterialName() {
+            const materialId = document.getElementById('id_material').value;
+            const materialNameField = document.getElementById('material_name');
 
-@section('title', 'Criar Solicitação')
+            // Pega o nome do material do atributo "data-name"
+            const selectedOption = document.querySelector(`#id_material option[value="${materialId}"]`);
+            materialNameField.textContent = selectedOption ? selectedOption.dataset.name : '';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitar Produto</h1>
+        <form action="{{ route('solicitacoes.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="id_material">Selecione o Produto:</label>
+                <select id="id_material" name="id_material" onchange="updateMaterialName()" required>
+                    <option value="">Selecione...</option>
+                    @foreach ($materiais as $material)
+                        <option value="{{ $material->id }}" data-name="{{ $material->nome }}">{{ $material->id }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-@section('content')
-<div class="container">
-    <h1>Criar Solicitação de Material</h1>
+            <div class="form-group">
+                <p><strong>Nome do Produto:</strong> <span id="material_name"></span></p>
+            </div>
 
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" required>
+            </div>
+
+            <button type="submit" class="btn">Solicitar</button>
+        </form>
     </div>
-    @endif
-
-    <form action="{{ route('solicitacoes.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="id_funcionario">Funcionário</label>
-            <select name="id_funcionario" id="id_funcionario" class="form-control">
-                <option value="">Selecione um Funcionário</option>
-                @foreach($funcionarios as $funcionario)
-                    <option value="{{ $funcionario->id }}">{{ $funcionario->nome }}</option>
-                @endforeach
-            </select>
-            @error('id_funcionario')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="id_material">Material</label>
-            <select name="id_material" id="id_material" class="form-control">
-                <option value="">Selecione um Material</option>
-                @foreach($materiais as $material)
-                    <option value="{{ $material->id }}">{{ $material->nome }}</option>
-                @endforeach
-            </select>
-            @error('id_material')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="dataSolicitacao">Data da Solicitação</label>
-            <input type="date" name="dataSolicitacao" id="dataSolicitacao" class="form-control" value="{{ old('dataSolicitacao') }}">
-            @error('dataSolicitacao')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="quantidade">Quantidade</label>
-            <input type="number" name="quantidade" id="quantidade" class="form-control" value="{{ old('quantidade') }}">
-            @error('quantidade')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="status">Status</label>
-            <input type="text" name="status" id="status" class="form-control" value="{{ old('status') }}">
-            @error('status')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="dataDevolucao">Data de Devolução</label>
-            <input type="date" name="dataDevolucao" id="dataDevolucao" class="form-control" value="{{ old('dataDevolucao') }}">
-            @error('dataDevolucao')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <button type="submit" class="btn btn-primary">Salvar Solicitação</button>
-    </form>
-</div>
-@endsection
+</body>
+</html>

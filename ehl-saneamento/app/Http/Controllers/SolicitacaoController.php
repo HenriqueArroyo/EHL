@@ -12,32 +12,41 @@ class SolicitacaoController extends Controller
     // Exibe o formulário para criar uma nova solicitação
     public function create()
     {
-        // Obtém todos os funcionários e materiais para preencher as opções no formulário
-        $funcionarios = Funcionario::all();
-        $materiais = Material::all();
-
-        return view('solicitacoes.create', compact('funcionarios', 'materiais'));
+        $materiais = Material::all(); // Apenas materiais disponíveis
+        return view('solicitacoes.create', compact('materiais'));
     }
 
-    // Armazena a solicitação no banco de dados
     public function store(Request $request)
     {
-        // Validação dos dados recebidos
-        $validated = $request->validate([
-            'id_funcionario' => 'required|exists:funcionarios,id',
+        $request->validate([
             'id_material' => 'required|exists:materiais,id',
-            'dataSolicitacao' => 'required|date',
             'quantidade' => 'required|integer|min:1',
-            'status' => 'required|string|max:20',
-            'dataDevolucao' => 'nullable|date',
         ]);
 
-        // Cria a solicitação no banco de dados
-        Solicitacao::create($validated);
+        $material = Material::findOrFail($request->id_material);
 
-        // Redireciona para uma página de sucesso ou para a listagem de solicitações
-        return redirect()->route('solicitacoes.index')->with('success', 'Solicitação realizada com sucesso!');
+        // Lógica para definir status e ajustar estoque
+        $status = $material->acesso === 'Sim' ? 'Aprovado' : 'Requisitado';
+
+        if ($status === 'Aprovado') {
+            if ($material->quantidade < $request->quantidade) {
+                return back()->withErrors(['quantidade' => 'Estoque insuficiente.']);
+            }
+            $material->quantidade -= $request->quantidade;
+            $material->save();
+        }
+
+        Solicitacao::create([
+            'id_funcionario' => 1, // Obtém o ID do funcionário logado
+            'id_material' => $material->id,
+            'dataSolicitacao' => now(),
+            'quantidade' => $request->quantidade,
+            'status' => $status,
+        ]);
+
+        return redirect()->route('funcionarios.index')->with('success', 'Solicitação realizada com sucesso!');
     }
+
 
     // Lista todas as solicitações feitas
     public function index()

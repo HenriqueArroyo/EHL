@@ -49,7 +49,7 @@ Route::delete('/materiais/{id}', [MaterialController::class, 'destroy'])->name('
 use App\Http\Controllers\SolicitacaoController;
 
 Route::get('solicitacoes', [SolicitacaoController::class, 'index'])->name('solicitacoes.index');
-Route::get('solicitacoes/create', [SolicitacaoController::class, 'create'])->name('solicitacoes.create');
+Route::get('solicitarMateriais', [SolicitacaoController::class, 'create'])->name('solicitacoes.create');
 Route::post('solicitacoes', [SolicitacaoController::class, 'store'])->name('solicitacoes.store');
 
 use App\Http\Controllers\AuthController;
