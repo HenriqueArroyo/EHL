@@ -2,22 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Gestor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Gestor>
- */
 class GestorFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Gestor::class;
+
+    public function definition()
     {
         return [
-            //
+            'nome' => $this->faker->name,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
