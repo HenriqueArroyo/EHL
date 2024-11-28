@@ -40,8 +40,9 @@
             <div class="input-group">
                 <label for="quantidade">Quantidade</label><br>
                 <input type="number" id="quantidade" name="quantidade" min="1" required>
-            </div>
-
+            </div> @error('quantidade')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
             <button type="submit" class="login-button">Solicitar</button>
         </form>
     </div>

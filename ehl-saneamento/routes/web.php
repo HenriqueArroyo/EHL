@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 use App\Http\Controllers\FuncionarioController;
 
 Route::prefix('funcionarios')->group(function () {
@@ -62,3 +66,23 @@ Route::post('login', [AuthController::class, 'login']);
 
 // Logout
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+use App\Http\Middleware\StoreFuncionarioId;
+
+Route::middleware([StoreFuncionarioId::class])->group(function () {
+    Route::get('/funcionarios', [FuncionarioController::class, 'index']);
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/solicitacoesFuncionario', [SolicitacaoController::class, 'indexLogado'])->name('solicitacoes.funcionario');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    // Exibe os materiais aprovados para devolução
+    Route::get('materiaisAprovados', [SolicitacaoController::class, 'materiaisAprovados'])->name('solicitacoes.materiaisAprovados');
+
+    // Rota para devolver material
+    Route::put('solicitacoes/{id}/devolver', [SolicitacaoController::class, 'devolverMaterial'])->name('solicitacoes.devolver');
+});

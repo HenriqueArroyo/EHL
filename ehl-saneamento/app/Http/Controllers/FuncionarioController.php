@@ -12,14 +12,13 @@ class FuncionarioController extends Controller
 {
     public function index()
     {
-          // Recupera o ID do usuário autenticado
-          $userId = Auth::id();
-
-          // Caso precise filtrar dados baseados no ID do usuário logado
-          $funcionarios = Funcionario::where('id_gestor', $userId)->get();
-        $funcionarios = Funcionario::all();
+        $funcionarioId = Auth::id();
+        // Agora use o $funcionarioId como necessário
+        $funcionarios = Funcionario::where('id_gestor', $funcionarioId)->get();
         return view('funcionarios.index', compact('funcionarios'));
     }
+
+
     // Exibir o formulário de cadastro
     public function create()
     {
@@ -82,3 +81,15 @@ class FuncionarioController extends Controller
         return redirect()->route('funcionarios.index')->with('success', 'Funcionário removido com sucesso!');
     }
 }
+
+
+// você pode pegar o valor diretamente da sessão:
+
+// php
+// Copiar código
+// $funcionarioId = session('funcionario_id');
+// Ou, se você preferir, pode acessar diretamente através do Auth:
+
+// php
+// Copiar código
+// $funcionarioId = Auth::id();

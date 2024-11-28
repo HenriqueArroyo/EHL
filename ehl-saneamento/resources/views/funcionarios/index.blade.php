@@ -9,11 +9,15 @@
 <body>
 <div>
 <img id="background" src="{{asset('assets/img/Index.png')}}" alt="">
+<div class="voltar">
+    <a href="/home"><button type="submit">logout</button></a>
+</div>
 <div class="container">
     <div class="button"><a href="/visualizarMateriais">Visualizar Materiais</a></div>
     <div class="button"><a href="/solicitarMateriais">Solicitar Materiais</a></div>
-    <div class="button"><a href="">Visualizar Pedidos</a></div>
-    <div class="button"><a href="">Devolução de Materiais</a></div>
+    <div class="button"><a href="/solicitacoesFuncionario">Visualizar Pedidos</a></div>
+    <div class="button"><a href="/materiaisAprovados">Devolução de Materiais</a></div>
 </div>
+
 </body>
 </html>
