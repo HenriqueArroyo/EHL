@@ -27,18 +27,20 @@ class SolicitacaoController extends Controller
         $material = Material::findOrFail($request->id_material);
 
         // Lógica para definir status e ajustar estoque
-        $status = $material->acesso === 'true' ? 'Aprovado' : 'Requisitado';
+        $status = $material->acesso ? 'Aprovado' : 'Requisitado'; // Mudança aqui: verifica se 'acesso' é true
 
         if ($status === 'Aprovado') {
             if ($material->quantidade < $request->quantidade) {
                 return back()->withErrors(['quantidade' => 'Estoque insuficiente.']);
             }
+            // Atualiza a quantidade do material no estoque
             $material->quantidade -= $request->quantidade;
             $material->save();
         }
 
+        // Cria a solicitação com o status e a quantidade ajustada
         Solicitacao::create([
-            'id_funcionario' => 1, // Obtém o ID do funcionário logado
+            'id_funcionario' => 1, // Obtém o ID do funcionário logado (ajustar conforme necessário)
             'id_material' => $material->id,
             'dataSolicitacao' => now(),
             'quantidade' => $request->quantidade,
@@ -47,6 +49,7 @@ class SolicitacaoController extends Controller
 
         return redirect()->route('funcionarios.index')->with('success', 'Solicitação realizada com sucesso!');
     }
+
 
 
     // Lista todas as solicitações feitas
