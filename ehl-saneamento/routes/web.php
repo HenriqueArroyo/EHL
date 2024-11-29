@@ -57,6 +57,7 @@ Route::get('solicitarMateriais', [SolicitacaoController::class, 'create'])->name
 Route::post('solicitacoes', [SolicitacaoController::class, 'store'])->name('solicitacoes.store');
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GestorController;
 
 // Exibir o formulário de login
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -68,6 +69,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 use App\Http\Middleware\StoreFuncionarioId;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::middleware([StoreFuncionarioId::class])->group(function () {
     Route::get('/funcionarios', [FuncionarioController::class, 'index']);
@@ -85,4 +87,13 @@ Route::middleware(['auth'])->group(function () {
 
     // Rota para devolver material
     Route::put('solicitacoes/{id}/devolver', [SolicitacaoController::class, 'devolverMaterial'])->name('solicitacoes.devolver');
+});
+
+
+Route::prefix('gestor')->group(function () {
+    // Exibir o formulário de cadastro
+    Route::get('dashboard', [GestorController :: class, 'dashboard'])->name('gestores.dashboard');
+
+    Route::get('materiais', [MaterialController::class, 'gestor'])->name('gestores.materiais');
+
 });

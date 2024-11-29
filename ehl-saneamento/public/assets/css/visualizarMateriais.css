@@ -22,25 +22,26 @@ h1 {
 
 table{
     background-color: white;
-    border: 1px solid black;
-margin-left: 15vh;
+width: 88%;
+height: auto;
 }
-
 .container{
     background-color: white;
     position: absolute;
-    width: 90vh;
+    width: 130vh;
     height: 70vh;
     top: 15vh;
-    left: 55vh;
+    left: 35vh;
     border-radius: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-td{
-    border: 1px solid black;
-}
 
 thead{
-    border: 1px solid black;
+    text-align: end;
+
+}
+
+td{
+    text-align: end;
 }

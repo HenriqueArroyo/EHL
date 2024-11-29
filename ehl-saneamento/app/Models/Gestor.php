@@ -1,15 +1,16 @@
 <?php
 
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
-class Gestor extends Model
+class Gestor extends Model implements AuthenticatableContract
 {
-    use HasFactory;
+    use HasFactory, Authenticatable;
 
     // Definir a tabela associada ao modelo
     protected $table = 'gestores';
@@ -40,5 +41,11 @@ class Gestor extends Model
                 $gestor->senha = Hash::make($gestor->senha);
             }
         });
+    }
+
+    // Usar "password" como atributo para autenticação padrão do Laravel
+    public function getAuthPassword()
+    {
+        return $this->senha;
     }
 }

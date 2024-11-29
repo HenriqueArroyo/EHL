@@ -40,6 +40,11 @@ return [
         'driver' => 'session',
         'provider' => 'funcionarios',
     ],
+
+    'gestor' => [
+        'driver' => 'session',
+        'provider' => 'gestores',
+    ],
 ],
 
 
@@ -64,6 +69,11 @@ return [
     'funcionarios' => [
         'driver' => 'eloquent',
         'model' => App\Models\Funcionario::class,
+    ],
+
+    'gestores' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Gestor::class,
     ],
 ],
 

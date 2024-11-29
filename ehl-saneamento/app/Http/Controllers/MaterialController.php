@@ -28,7 +28,7 @@ class MaterialController extends Controller
         Material::create($validated);
 
         // Redireciona para a página de listagem de materiais
-        return redirect()->route('materiais.index')->with('success', 'Material cadastrado com sucesso!');
+        return redirect()->route('gestores.materiais')->with('success', 'Material cadastrado com sucesso!');
     }
 
     // Lista todos os materiais cadastrados
@@ -41,6 +41,15 @@ class MaterialController extends Controller
         return view('materiais.index', compact('materiais'));
     }
 
+    public function gestor()
+    {
+        // Obtém todos os materiais do banco de dados
+        $materiais = Material::all();
+
+        // Retorna a view de listagem passando os materiais
+        return view('gestores.materiais', compact('materiais'));
+    }
+
     public function viewFuncionario()
     {
         // Obtém todos os materiais do banco de dados
@@ -49,6 +58,8 @@ class MaterialController extends Controller
         // Retorna a view de listagem passando os materiais
         return view('funcionarios.visualizarMateriais', compact('materiais'));
     }
+
+
 
     // Exibe o formulário de edição de um material
     public function edit($id)
@@ -73,7 +84,7 @@ class MaterialController extends Controller
         $material->update($validated);
 
         // Redireciona de volta para a listagem com uma mensagem de sucesso
-        return redirect()->route('materiais.index')->with('success', 'Material atualizado com sucesso!');
+        return redirect()->route('gestores.materiais')->with('success', 'Material atualizado com sucesso!');
     }
 
     // Remove um material do banco de dados
@@ -84,6 +95,6 @@ class MaterialController extends Controller
         $material->delete();
 
         // Redireciona de volta para a listagem com uma mensagem de sucesso
-        return redirect()->route('materiais.index')->with('success', 'Material removido com sucesso!');
+        return redirect()->route('gestores.materiais')->with('success', 'Material removido com sucesso!');
     }
 }

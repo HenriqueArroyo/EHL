@@ -12,9 +12,9 @@ class GestorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function dashboard()
     {
-        //
+        return view('gestores.dashboard');
     }
 
     /**
