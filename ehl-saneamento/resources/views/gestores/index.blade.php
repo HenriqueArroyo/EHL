@@ -1,46 +1,48 @@
-<!-- resources/views/funcionarios/index.blade.php -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Materiais</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Gestão de Materiais</h1>
 
-@extends('layouts.app')
+    <div>
+        <canvas id="materiaisChart" width="400" height="200"></canvas>
+    </div>
 
-@section('content')
-<div class="container">
-    <h1>Funcionários</h1>
+    <script>
+        // Obtendo os dados dos materiais do backend
+        const materiais = @json($materiais);
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+        // Preparando os dados para o gráfico
+        const nomesMateriais = materiais.map(material => material.nome);
+        const quantidades = materiais.map(material => material.quantidade);
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>CPF</th>
-                <th>Data de Nascimento</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($funcionarios as $funcionario)
-                <tr>
-                    <td>{{ $funcionario->nome }}</td>
-                    <td>{{ $funcionario->email }}</td>
-                    <td>{{ $funcionario->cpf }}</td>
-                    <td>{{ $funcionario->dataNascimento }}</td>
-                    <td>
-                        <a href="{{ route('funcionarios.edit', $funcionario->id) }}" class="btn btn-warning">Editar</a>
-
-                        <form action="{{ route('funcionarios.destroy', $funcionario->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja remover este funcionário?')">Remover</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-@endsection
+        // Criando o gráfico
+        const ctx = document.getElementById('materiaisChart').getContext('2d');
+        const materiaisChart = new Chart(ctx, {
+            type: 'bar', // tipo de gráfico (bar, line, etc.)
+            data: {
+                labels: nomesMateriais, // rótulos das barras (nomes dos materiais)
+                datasets: [{
+                    label: 'Quantidade de Materiais',
+                    data: quantidades, // os dados para o gráfico
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

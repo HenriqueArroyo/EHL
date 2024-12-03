@@ -25,6 +25,7 @@
 </aside>
 
     <div class="container">
+        <img id="solicitacaoGrafico" src="{{asset('assets/img/solicitacaoGrafico.png')}}" alt="">
 
     </div>
 

@@ -96,4 +96,8 @@ Route::prefix('gestor')->group(function () {
 
     Route::get('materiais', [MaterialController::class, 'gestor'])->name('gestores.materiais');
 
+    Route::get('solicitacao', [SolicitacaoController::class, 'gestorSol'])->name('gestores.solicitacao');
+
 });
+
+Route::patch('/gestor/solicitacao/{id}/aprovar', [SolicitacaoController::class, 'aprovarSolicitacao'])->name('gestores.solicitacao');

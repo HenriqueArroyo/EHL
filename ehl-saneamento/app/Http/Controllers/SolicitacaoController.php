@@ -61,6 +61,12 @@ class SolicitacaoController extends Controller
         return view('solicitacoes.index', compact('solicitacoes'));
     }
 
+    public function gestorSol()
+    {
+        $solicitacoes = Solicitacao::all();
+        return view('gestores.solicitacao', compact('solicitacoes'));
+    }
+
     public function indexLogado()
     {
         // Pega o ID do funcionário logado
@@ -104,5 +110,33 @@ class SolicitacaoController extends Controller
         $material->save();
 
         return redirect()->route('solicitacoes.materiaisAprovados')->with('success', 'Material devolvido com sucesso!');
+    }
+
+    public function aprovarSolicitacao($id)
+    {
+        // Encontre a solicitação pelo ID
+        $solicitacao = Solicitacao::findOrFail($id);
+
+        // Verifica se o status é 'Requisitado' antes de alterar
+        if ($solicitacao->status === 'Requisitado') {
+            // Atualiza o status para 'Aprovado'
+            $solicitacao->status = 'Aprovado';
+            $solicitacao->save();
+
+            // Atualiza a quantidade do material
+            $material = $solicitacao->material;
+            if ($material->quantidade >= $solicitacao->quantidade) {
+                // Se houver estoque suficiente, subtrai a quantidade solicitada
+                $material->quantidade -= $solicitacao->quantidade;
+                $material->save();
+            } else {
+                // Se o estoque for insuficiente, altera o status para 'Requisitado'
+                $solicitacao->status = 'Requisitado';
+                $solicitacao->save();
+                return back()->withErrors(['quantidade' => 'Estoque insuficiente. Solicitação não pode ser aprovada.']);
+            }
+        }
+
+        return redirect()->route('gestor.solicitacao')->with('success', 'Solicitação aprovada com sucesso!');
     }
 }

@@ -20,6 +20,7 @@ class FuncionarioController extends Controller
 
 
     // Exibir o formulário de cadastro
+
     public function create()
     {
         // Obter os gestores para exibir no select
