@@ -31,10 +31,10 @@ height: auto;
 .container{
     background-color: white;
     position: absolute;
-    width: 130vh;
+    width: 150vh;
     height: 85vh;
     top: 8vh;
-    left: 63vh;
+    left: 54vh;
     border-radius: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
@@ -102,14 +102,24 @@ aside{
 
 table{
     width: 100%;
+    border: 0.2px solid black;
+
 }
 thead{
-    text-align: end;
+    text-align: center;
+    border: 1px solid black;
+
+}
+
+tr{
+    border: 1px solid black;
 
 }
 
 td{
-    text-align: end;
+    text-align: center;
+    border: 0.2px solid black;
+
 }
 
 .new {
@@ -125,4 +135,23 @@ border: 1px solid black;
 height: 6vh;
 width: 20vh;
 cursor: pointer;
+}
+
+#excluir{
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+
+}
+
+#editar{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+#excluir:hover{
+    background-color: black;
+    color: white;
 }

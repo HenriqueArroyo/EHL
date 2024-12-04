@@ -24,6 +24,7 @@ table{
     background-color: white;
 width: 88%;
 height: auto;
+
 }
 .container{
     background-color: white;
@@ -40,8 +41,10 @@ height: auto;
 thead{
     text-align: end;
 
+
 }
 
 td{
     text-align: end;
 }
+

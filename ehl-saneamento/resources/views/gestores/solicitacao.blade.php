@@ -57,7 +57,7 @@
                             <form action="{{ route('gestores.solicitacao', $solicitacao->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-success">Aprovar</button>
+                                <button id="excluir" type="submit" class="btn btn-success">Aprovar</button>
                             </form>
                         @endif
                     </td>

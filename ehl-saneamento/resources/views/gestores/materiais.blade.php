@@ -18,7 +18,7 @@
         <div class="buttons">
             <a id="dashboard" href="/gestor/dashboard"><button  type="submit"><p>Dashboard</p></button></a>
             <a id="estoque" href="/gestor/materiais"><button type="submit"><p>Estoque</p></button></a>
-            <a id="solicitacoes" href=""><button type="submit"><p>Solicitações</p></button></a>
+            <a id="solicitacoes" href="/gestor/solicitacao"><button type="submit"><p>Solicitações</p></button></a>
             <a id="sign-out" href="/home"><button type="submit"><p>Sign Out</p></button></a>
         </div>
 
@@ -57,13 +57,13 @@
                         <td>{{ $material->acesso ? 'Sim' : 'Não' }}</td>
                         <td>
                             <!-- Ação de Editar -->
-                            <a href="{{ route('materiais.edit', $material->id) }}" class="btn btn-info btn-sm">Editar</a>
+                            <a href="{{ route('materiais.edit', $material->id) }}" id="editar">Editar</a>
 
                             <!-- Ação de Excluir -->
                             <form action="{{ route('materiais.destroy', $material->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este material?')">Excluir</button>
+                                <button type="submit" id="excluir" onclick="return confirm('Tem certeza que deseja excluir este material?')">Excluir</button>
                             </form>
                         </td>
                     </tr>

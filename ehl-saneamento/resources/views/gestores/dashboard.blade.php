@@ -16,7 +16,7 @@
     <div class="buttons">
         <a id="dashboard" href="/gestor/dashboard"><button  type="submit"><p>Dashboard</p></button></a>
         <a id="estoque" href="/gestor/materiais"><button type="submit"><p>Estoque</p></button></a>
-        <a id="solicitacoes" href=""><button type="submit"><p>Solicitações</p></button></a>
+        <a id="solicitacoes" href="/gestor/solicitacao"><button type="submit"><p>Solicitações</p></button></a>
         <a id="sign-out" href="/home"><button type="submit"><p>Sign Out</p></button></a>
     </div>
 
@@ -26,7 +26,9 @@
 
     <div class="container">
         <img id="solicitacaoGrafico" src="{{asset('assets/img/solicitacaoGrafico.png')}}" alt="">
-
+        <img id="itemGrafico" src="{{asset('assets/img/itemGrafico.png')}}" alt="">
+        <div class="linha"></div>
+        <img id="itemsolGrafico" src="{{asset('assets/img/solicitacaoitemGrafico.png')}}" alt="">
     </div>
 
     <div class="voltar">
