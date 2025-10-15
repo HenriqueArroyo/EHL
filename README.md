@@ -2,9 +2,9 @@
 
 
 ### Objetivo: Identificar um problema e definir os requisitos do projeto. <br>
-######Henrique Arroyo: Design, Levantamento de Requisitos <br>
-######Eduardo Ananias: Design, Levantamento de Requisitos <br>
-######Leonardo Lira: Design, Levantamento de Requisitos<br>
+###### Henrique Arroyo: Design, Levantamento de Requisitos <br>
+###### Eduardo Ananias: Design, Levantamento de Requisitos <br>
+###### Leonardo Lira: Design, Levantamento de Requisitos<br>
 
 
 ### 1. Identificação do Problema<br>
@@ -13,10 +13,10 @@ Perda de Equipamentos: Sem um registro eficaz, equipamentos podem ser retirados 
 Baixa Eficiência Operacional: A ausência de um sistema que documente as movimentações de itens no galpão faz com que os gestores e funcionários percam tempo tentando localizar equipamentos ou confirmar retiradas e devoluções.<br>
 Impacto nos Processos de Saneamento: A falta de controle sobre os equipamentos pode afetar a execução dos processos de manutenção e operação de saneamento, já que a falta de recursos adequados no momento certo atrasa o serviço e gera custos adicionais para reposição.<br>
 
-###2. Definição do Problema<br>
+### 2. Definição do Problema<br>
 O problema é, portanto, uma deficiência na rastreabilidade e no controle da retirada de equipamentos do estoque, dificultando a gestão eficiente e precisa do inventário do galpão. Essa dificuldade de controle impacta negativamente na segurança e na responsabilidade sobre os ativos, bem como na transparência e responsabilidade dos funcionários envolvidos.<br>
 
-###3. Descrição da Solução<br>
+### 3. Descrição da Solução<br>
 A solução proposta é o desenvolvimento de um sistema informatizado para gerenciar o fluxo de equipamentos do galpão, onde cada retirada, devolução e movimentação seja registrada de forma organizada e acessível. A solução deve incluir as seguintes funcionalidades:<br>
 Registro Detalhado de Retiradas e Devoluções: Um módulo que permite aos funcionários registrar a retirada de qualquer equipamento, documentando data, hora, funcionário responsável, equipamento específico e a área que o solicitou.<br>
 Painel de Visibilidade para Gestores: Os gestores da área terão um painel com acesso direto a relatórios e registros de retiradas, permitindo acompanhar o status de cada equipamento. Isso ajuda a verificar se os equipamentos foram devolvidos no prazo ou se estão fora de uso por um período prolongado.<br>
@@ -26,9 +26,9 @@ Integração de Dados em Tempo Real: Sempre que um equipamento é retirado ou de
 A implementação desse sistema trará benefícios significativos para o controle de equipamentos da EHL SANEAMENTO, assegurando que gestores possam monitorar o uso dos recursos e tomar decisões mais informadas e rápidas. Além disso, reduzirá perdas e facilitará a alocação e organização dos equipamentos, impactando diretamente na eficiência das operações da empresa.<br>
 
 
-###Requisitos iniciais:<br>
+### Requisitos iniciais:<br>
 
-###1. Requisitos Funcionais<br>
+### 1. Requisitos Funcionais<br>
 
 Autenticação e Autorização de Usuários<br>
 Login com diferentes níveis de acesso (administrador, gestor, usuário comum).<br>
@@ -66,7 +66,7 @@ Filtros de pesquisa por status, data, usuário responsável, entre outros.<br>
 
 
 
-###2. Requisitos Não Funcionais<br>
+### 2. Requisitos Não Funcionais<br>
 
 Banco de Dados<br>
 Utilização de PostgreSQL, gerenciado através do pgAdmin, para armazenamento seguro e eficiente dos dados de estoque e movimentações.<br>
